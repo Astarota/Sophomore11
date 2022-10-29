@@ -3,18 +3,18 @@ const { CRYPTODEVS_NFT_CONTRACT_ADDRESS } = require("../constants");
 
 async function main() {
   // Deploy the FakeNFTMarketplace contract first
-  // const FakeNFTMarketplace = await ethers.getContractFactory(
-  //   "FakeNFTMarketplace"
-  // );
-  // const fakeNftMarketplace = await FakeNFTMarketplace.deploy();
-  // await fakeNftMarketplace.deployed();
+  const FakeNFTMarketplace = await ethers.getContractFactory(
+    "FakeNFTMarketplace"
+  );
+  const fakeNftMarketplace = await FakeNFTMarketplace.deploy();
+  await fakeNftMarketplace.deployed();
 
-  // console.log("FakeNFTMarketplace deployed to: ", fakeNftMarketplace.address);
+  console.log("FakeNFTMarketplace deployed to: ", fakeNftMarketplace.address);
 
   // Now deploy the CryptoDevsDAO contract
   const CryptoDevsDAO = await ethers.getContractFactory("CryptoDevsDAO");
   const cryptoDevsDAO = await CryptoDevsDAO.deploy(
-    "0xf012236E48f87B58b968849c37D952386824a96D",
+    fakeNftMarketplace.address,
     CRYPTODEVS_NFT_CONTRACT_ADDRESS,
     {
       // This assumes your account has at least 1 ETH in it's account
